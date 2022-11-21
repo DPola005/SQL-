@@ -67,5 +67,22 @@ SELECT hometown, SUM(durability) AS total_durability
 FROM marvels 
 GROUP BY hometown HAVING total_durability > 6;
 
+--Using the CASE operator find which characters are considered "weak", "strong", or "normal" 
+SELECT name, energy_Projection  
+    CASE 
+        WHEN energy_Projection > 5 THEN "strong" 
+        WHEN energy_Projection = 5 THEN "normal" 
+        ELSE "weak"
+    END AS "energy_level"
+FROM marvels 
 
+--USING COUNT to see how many of each kind of energy_level there is 
+SELECT COUNT(*)  
+    CASE 
+        WHEN energy_Projection > 5 THEN "strong" 
+        WHEN energy_Projection = 5 THEN "normal" 
+        ELSE "weak"
+    END AS "energy_level"
+FROM marvels
+GROUP BY energy_level;
 
