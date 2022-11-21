@@ -1,0 +1,49 @@
+## Created a table based on famous actors 
+
+CREATE TABLE actors (id INTEGER PRIMARY KEY, first_name TEXT, last_name TEXT, age INTEGER, birth_place TEXT);
+
+INSERT INTO actors (first_name, last_name, age, birth_place)
+    VALUES ("Chris", "Evans", 41, "Boston"); 
+INSERT INTO actors (first_name, last_name, age, birth_place)
+    VALUES ("Keanu", "Reeves", 58, "Beirut");
+INSERT INTO actors (first_name, last_name, age, birth_place)
+    VALUES ("Johnny", "Depp", 59, "Kentucky");
+INSERT INTO actors (first_name, last_name, age, birth_place)
+    VALUES ("Ryan", "Reynolds", 46, "Vancouver");
+INSERT INTO actors (first_name, last_name, age, birth_place)
+    VALUES ("Will", "Smith", 54, "Philadelphia");
+INSERT INTO actors (first_name, last_name, age, birth_place)
+    VALUES ("Tom", "Cruise", 60, "New York");
+
+--Created a table describing the actors' role and the movie they starred in 
+
+CREATE TABLE movies (id INTEGER PRIMARY KEY, actors_id INTEGER, title TEXT, role TEXT);
+
+INSERT INTO movies (actors_id, title, role)
+    VALUES (1, "Captain America", "Superhero");
+INSERT INTO movies (actors_id, title, role)
+    VALUES (2, "John Wick", "Assassin");
+INSERT INTO movies (actors_id, title, role)
+    VALUES (3, "Pirates of the Caribbean", "Pirate");
+INSERT INTO movies (actors_id, title, role)
+    VALUES (4, "DeadPool", "Mercenary");
+INSERT INTO movies (actors_id, title, role)
+    VALUES (5, "Men In Black", "Agent");
+INSERT INTO movies (actors_id, title, role)
+    VALUES (6, "Mission Impossible", "Spy");
+    
+--Created a table where the actors are put in groups based on their roles
+
+CREATE TABLE groups (id INTEGER PRIMARY KEY, first_id TEXT, second_id TEXT, third_id TEXT);
+
+INSERT INTO groups (first_id, second_id, third_id)
+    VALUES (1, 2, 4);
+INSERT INTO groups (first_id, second_id, third_id)
+    VALUES (3, 5, 6);
+ 
+ 
+
+
+
+    
+    
