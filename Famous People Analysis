@@ -1,4 +1,4 @@
-## Created a table based on famous actors 
+--Created a table based on famous actors 
 
 CREATE TABLE actors (id INTEGER PRIMARY KEY, first_name TEXT, last_name TEXT, age INTEGER, birth_place TEXT);
 
@@ -14,23 +14,25 @@ INSERT INTO actors (first_name, last_name, age, birth_place)
     VALUES ("Will", "Smith", 54, "Philadelphia");
 INSERT INTO actors (first_name, last_name, age, birth_place)
     VALUES ("Tom", "Cruise", 60, "New York");
+INSERT INTO actors (first_name, last_name, age, birth_place)
+    VALUES ("Darren", "Polanes", 23, "California");
 
 --Created a table describing the actors' role and the movie they starred in 
 
-CREATE TABLE movies (id INTEGER PRIMARY KEY, actors_id INTEGER, title TEXT, role TEXT);
+CREATE TABLE movies (id INTEGER PRIMARY KEY, actors_id INTEGER, title TEXT, role TEXT, rating TEXT, rival_id);
 
-INSERT INTO movies (actors_id, title, role)
-    VALUES (1, "Captain America", "Superhero");
-INSERT INTO movies (actors_id, title, role)
-    VALUES (2, "John Wick", "Assassin");
-INSERT INTO movies (actors_id, title, role)
-    VALUES (3, "Pirates of the Caribbean", "Pirate");
-INSERT INTO movies (actors_id, title, role)
-    VALUES (4, "DeadPool", "Mercenary");
-INSERT INTO movies (actors_id, title, role)
-    VALUES (5, "Men In Black", "Agent");
-INSERT INTO movies (actors_id, title, role)
-    VALUES (6, "Mission Impossible", "Spy");
+INSERT INTO movies (actors_id, title, role, rating, rival_id)
+    VALUES (1, "Captain America", "Superhero", 79, 3);
+INSERT INTO movies (actors_id, title, role, rating, rival_id)
+    VALUES (2, "John Wick", "Assassin", 86, 5);
+INSERT INTO movies (actors_id, title, role, rating, rival_id)
+    VALUES (3, "Pirates of the Caribbean", "Pirate", 53, 1);
+INSERT INTO movies (actors_id, title, role, rating, rival_id)
+    VALUES (4, "DeadPool", "Mercenary", 85, 6);
+INSERT INTO movies (actors_id, title, role, rating, rival_id)
+    VALUES (5, "Men In Black", "Agent", 91, 2);
+INSERT INTO movies (actors_id, title, role, rating, rival_id)
+    VALUES (6, "Mission Impossible", "Spy", 93, 4);
     
 --Created a table where the actors are put in groups based on their roles
 
@@ -40,6 +42,40 @@ INSERT INTO groups (first_id, second_id, third_id)
     VALUES (1, 2, 4);
 INSERT INTO groups (first_id, second_id, third_id)
     VALUES (3, 5, 6);
+ 
+ --Using JOIN to match the actor's name to their role from different tables 
+SELECT actors.first_name, actors.last_name, movies.role 
+FROM actors
+JOIN movies 
+ON actors.id = movies.actors_id;
+
+--Using LEFT OUTER JOIN to find the 3 youngest actors and finding their corresponding rating and movies respectively 
+SELECT actors.first_name, actors.last_name, actors.age, movies.title, movies.rating
+FROM actors
+LEFT OUTER JOIN movies
+ON actors.id = movies.actors_id 
+GROUP BY actors.first_name
+ORDER BY age 
+LIMIT 3
+
+--Using SELF JOIN to show each title it's rival movie 
+SELECT DISTINCT movies.title, rival.title AS rival_movie
+FROM movies
+JOIN movies rival
+ON movies.actors_id = rival.rival_id;
+
+--Combining self join and join to find the corresponding movies of their own groups 
+SELECT a.title AS first_movie, b.title AS second_movie, c.title AS third_movie
+FROM groups 
+JOIN movies a 
+ON groups.first_id = a.id
+JOIN movies b
+ON groups.second_id = b.id
+JOIN movies c
+ON groups.third_id = c.id
+
+
+
  
  
 
